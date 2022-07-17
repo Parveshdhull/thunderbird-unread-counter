@@ -16,7 +16,7 @@ Also if you find any workaround this issue, please feel free to create a PR.
 ### Parameters:
 - THUNDERBIRD_PROFILE_PATH - Path to thunderbird profile
 - LAUNCHER_FILE - Create launcher file for thunderbird ([Steps](https://user-images.githubusercontent.com/17097240/179421776-f0c5cf6f-fd23-4b2f-b16b-63555ad23970.mp4))
-- SHOW_COUNT - Will Show unread count if true otherwise just a red dot to show new email
+- SHOW_COUNT - Will Show unread count if `true` otherwise just a red dot to show new email
 
 ### Bonus TIP
 For keeping thunderbird running in the background and emails synced
