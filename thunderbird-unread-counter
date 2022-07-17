@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# Parameters
+THUNDERBIRD_PROFILE_PATH="/home/parvesh_monu/.thunderbird/oaane596.default-release/ImapMail"
+LAUNCHER_FILE="/home/parvesh_monu/.config/xfce4/panel/launcher-30/16580125893.desktop"
+SHOW_COUNT=true
+
+icons_root_path=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+cd $THUNDERBIRD_PROFILE_PATH
+inboxes=`find ~+ -type f -name INBOX.msf`
+re='^[0-9]+$'
+
+changeLauncherIcon(){
+	case $1 in
+		0) icon="thunderbird.ico" ;;
+		[1-9]) icon="$1.png" ;;	
+		*)  icon="many.png" ;;	
+	esac
+
+	if [[ $SHOW_COUNT == true || $1 == 0 ]]; then
+		sed -i "/Icon=/c\Icon=$icons_root_path\/icons\/$icon" $LAUNCHER_FILE
+	else
+		sed -i "/Icon=/c\Icon=$icons_root_path\/icons\/unread.png" $LAUNCHER_FILE
+	fi
+}
+
+checkEmails(){
+	count=0
+	for inbox in $inboxes; do
+		result=`grep --text -o '(^A2=.)' $inbox | tail -1 | cut -c6`
+		if ! [[ $result =~ $re ]]; then
+			count=10
+			break
+		else
+			count=$((count+result))
+			if [[ $count -gt 9 ]]; then
+				break
+			fi 
+		fi
+	done
+	changeLauncherIcon $count
+}
+
+watchInboxes(){
+	while inotifywait  -qqe MODIFY $inboxes;
+		do
+			checkEmails
+	done
+}
+
+checkEmails
+watchInboxes
