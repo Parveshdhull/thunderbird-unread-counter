@@ -18,14 +18,10 @@ Also if you find any workaround this issue, please feel free to create a PR.
 - LAUNCHER_FILE - Create launcher file for thunderbird ([Steps](https://user-images.githubusercontent.com/17097240/179421776-f0c5cf6f-fd23-4b2f-b16b-63555ad23970.mp4))
 - SHOW_COUNT - Will Show unread count if `true` otherwise just a red dot to show new email
 
-### Bonus TIP
+### Bonus TIP:
 For keeping thunderbird running in the background and emails synced
 - Auto Start thunderbird on the system startup
-
 - Install [Minimize on close](https://addons.thunderbird.net/en-us/thunderbird/addon/minimize-on-close/)
-
 - Autorun `wmctrl -r "thunderbird" -b add,skip_taskbar,hidden` on startup.
-
   This way thunderbird will not be always visible in the taskbar and on Alt-tab. And you can keep using the PC while thunderbird running in the background without interfering. And it will open very fast on pressing launcher icon.
-
 - Autorun `thunderbird-unread-counter` on startup:
