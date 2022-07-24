@@ -3,7 +3,7 @@
 # Parameters
 THUNDERBIRD_PROFILE_PATH="/home/parvesh_monu/.thunderbird/oaane596.default-release/ImapMail"
 LAUNCHER_FILE="/home/parvesh_monu/.config/xfce4/panel/launcher-30/16580125893.desktop"
-SHOW_COUNT=true
+SHOW_COUNT=false
 
 icons_root_path=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $THUNDERBIRD_PROFILE_PATH
@@ -24,7 +24,7 @@ changeLauncherIcon(){
 	fi
 }
 
-checkEmails(){
+checkEmailsForCount(){
 	count=0
 	for inbox in $inboxes; do
 		result=`grep --text -o '(^A2=.)' $inbox | tail -1 | cut -c6`
@@ -39,6 +39,26 @@ checkEmails(){
 		fi
 	done
 	changeLauncherIcon $count
+}
+
+checkEmailsForUnread(){
+	count=0
+	for inbox in $inboxes; do
+		result=`grep --text -o '(^94=.)' $inbox | tail -1 | cut -c6`
+		if [[ $result = 1 ]]; then
+		    count=1
+		    break
+		fi
+	done
+	changeLauncherIcon $count
+}
+
+checkEmails(){
+    if [[ $SHOW_COUNT == true ]]; then
+	checkEmailsForCount
+    else
+	checkEmailsForUnread
+    fi
 }
 
 watchInboxes(){
