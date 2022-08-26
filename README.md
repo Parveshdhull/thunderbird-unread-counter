@@ -1,3 +1,5 @@
+> :warning: **Program is still under Development, and has few bugs(as mentioned below)**
+
 # thunderbird-unread-counter 
  Display unread emails count in linux tray/panel for all added accounts
 ![my-gif](https://user-images.githubusercontent.com/17097240/179421708-9861ca8c-a952-4b50-adc6-858180739580.gif)
